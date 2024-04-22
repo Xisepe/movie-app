@@ -1,0 +1,12 @@
+package ru.ccfit.golubevm.movieapp.core.entity;
+
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Series extends Title {
+
+}
