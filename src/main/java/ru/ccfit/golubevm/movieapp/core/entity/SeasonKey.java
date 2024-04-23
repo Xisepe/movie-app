@@ -1,19 +1,23 @@
 package ru.ccfit.golubevm.movieapp.core.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "episode")
-public class Episode extends SeriesUnit {
-
-    @EmbeddedId
-    private EpisodeKey episodeKey;
+@Embeddable
+public class SeasonKey implements Serializable {
+    @Column(name = "series_id")
+    private Integer seriesId;
+    @Column(name = "ordinal")
+    private Integer ordinal;
 
     @Override
     public final boolean equals(Object o) {
@@ -22,12 +26,13 @@ public class Episode extends SeriesUnit {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Episode episode = (Episode) o;
-        return getEpisodeKey() != null && Objects.equals(getEpisodeKey(), episode.getEpisodeKey());
+        SeasonKey seasonKey = (SeasonKey) o;
+        return getSeriesId() != null && Objects.equals(getSeriesId(), seasonKey.getSeriesId())
+                && getOrdinal() != null && Objects.equals(getOrdinal(), seasonKey.getOrdinal());
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(getEpisodeKey());
+        return Objects.hash(seriesId, ordinal);
     }
 }

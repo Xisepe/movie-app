@@ -1,8 +1,6 @@
 package ru.ccfit.golubevm.movieapp.core.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -18,6 +16,16 @@ import java.util.Set;
 public class TitleCrew extends TitlePerson {
 
     @ManyToMany
+    @JoinTable(
+            name = "title_crew_role",
+            joinColumns = {
+                    @JoinColumn(name = "title_id"),
+                    @JoinColumn(name = "person_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "crew_role_id")
+            }
+    )
     private Set<CrewRole> crewRoles = new LinkedHashSet<>();
 
     @Override

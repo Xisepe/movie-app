@@ -4,16 +4,27 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "episode")
-public class Episode extends SeriesUnit {
-
+@Table(name = "season")
+public class Season extends SeriesUnit {
     @EmbeddedId
-    private EpisodeKey episodeKey;
+    private SeasonKey seasonKey;
+
+    @ManyToMany
+    @JoinTable(
+            name = "season_episode",
+            joinColumns = {
+                    @JoinColumn(name="series_id"),
+                    @JoinColumn(name = "ordinal")
+            }
+    )
+    private Set<Episode> episodes = new LinkedHashSet<>();
 
     @Override
     public final boolean equals(Object o) {
@@ -22,12 +33,12 @@ public class Episode extends SeriesUnit {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Episode episode = (Episode) o;
-        return getEpisodeKey() != null && Objects.equals(getEpisodeKey(), episode.getEpisodeKey());
+        Season season = (Season) o;
+        return getSeasonKey() != null && Objects.equals(getSeasonKey(), season.getSeasonKey());
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(getEpisodeKey());
+        return Objects.hash(seasonKey);
     }
 }

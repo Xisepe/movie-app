@@ -2,7 +2,9 @@ package ru.ccfit.golubevm.movieapp.core.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.type.SqlTypes;
 
 import java.net.URL;
 import java.util.Objects;
@@ -20,7 +22,7 @@ public class MediaSource {
     @Column(name = "url")
     private URL url;
 
-    @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "media_type")
     private MediaType mediaType;
 

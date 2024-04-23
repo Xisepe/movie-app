@@ -18,7 +18,7 @@ public class CrewRole {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name", unique = true, length = 64)
     private String name;
 
     @Override

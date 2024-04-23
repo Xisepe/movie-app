@@ -2,7 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
-    id("org.flywaydb.flyway") version "10.11.1"
+    id("org.flywaydb.flyway") version "10.7.1"
 }
 
 group = "ru.ccfit.golubevm"
@@ -18,8 +18,23 @@ configurations {
     }
 }
 
+buildscript {
+    dependencies {
+        classpath("org.postgresql:postgresql:42.6.2")
+        classpath("org.flywaydb:flyway-database-postgresql:10.7.1")
+    }
+}
+
 repositories {
     mavenCentral()
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/db_project"
+    user = "xisepe"
+    password = "admin"
+    schemas = arrayOf("public")
+    cleanDisabled = false
 }
 
 dependencies {
@@ -29,6 +44,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
+    implementation("org.flywaydb:flyway-database-postgresql:10.7.1")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")

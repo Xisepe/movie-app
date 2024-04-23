@@ -49,6 +49,7 @@ public class Title extends MediaEntity {
     private LocalDate releaseDate;
 
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "mpaa_rating")
     private MpaaRating mpaaRating;
 
     @Column(name = "age_constraint")
@@ -66,5 +67,4 @@ public class Title extends MediaEntity {
             joinColumns = @JoinColumn(name = "title_id"),
             inverseJoinColumns = @JoinColumn(name = "genres_id"))
     private Set<Genre> genres = new LinkedHashSet<>();
-
 }
