@@ -1,15 +1,14 @@
 create table title_crew
 (
+    id        serial primary key,
     "order"   integer,
     title_id  int references title (id),
-    person_id int references person (id),
-    primary key (title_id, person_id)
+    person_id int references person (id)
 );
 
 create table title_crew_role
 (
-    title_id     int references title(id),
-    person_id    int references person(id),
-    crew_role_id int references crew_role(id),
-    primary key (title_id, person_id, crew_role_id)
+    title_crew_id int references title_crew (id),
+    crew_role_id  int references crew_role (id),
+    primary key (title_crew_id, crew_role_id)
 );

@@ -13,17 +13,11 @@ import java.util.Set;
 @Entity
 @Table(name = "season")
 public class Season extends SeriesUnit {
-    @EmbeddedId
-    private SeasonKey seasonKey;
+    @ManyToOne
+    @JoinColumn(name = "series_id")
+    private Series series;
 
-    @ManyToMany
-    @JoinTable(
-            name = "season_episode",
-            joinColumns = {
-                    @JoinColumn(name="series_id"),
-                    @JoinColumn(name = "ordinal")
-            }
-    )
+    @OneToMany(mappedBy = "season", orphanRemoval = true)
     private Set<Episode> episodes = new LinkedHashSet<>();
 
     @Override
@@ -34,11 +28,11 @@ public class Season extends SeriesUnit {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         Season season = (Season) o;
-        return getSeasonKey() != null && Objects.equals(getSeasonKey(), season.getSeasonKey());
+        return getId() != null && Objects.equals(getId(), season.getId());
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(seasonKey);
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

@@ -8,16 +8,16 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public class TitlePerson {
-    @EmbeddedId
-    private TitlePersonId titlePersonId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @ManyToOne
-    @MapsId("titleId")
     @JoinColumn(name = "title_id")
     private Title title;
 
     @ManyToOne
-    @MapsId("personId")
     @JoinColumn(name = "person_id")
     private Person person;
 

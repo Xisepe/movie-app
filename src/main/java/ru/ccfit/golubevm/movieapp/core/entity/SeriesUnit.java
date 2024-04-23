@@ -8,6 +8,11 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public class SeriesUnit extends MediaPreview {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     @Column(name = "tagline")
     private String tagline;
 
@@ -22,4 +27,8 @@ public class SeriesUnit extends MediaPreview {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "ordinal")
+    private Integer ordinal;
+
 }

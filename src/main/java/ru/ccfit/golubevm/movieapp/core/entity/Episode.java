@@ -11,9 +11,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "episode")
 public class Episode extends SeriesUnit {
-
-    @EmbeddedId
-    private EpisodeKey episodeKey;
+    @ManyToOne
+    private Season season;
 
     @Override
     public final boolean equals(Object o) {
@@ -23,11 +22,11 @@ public class Episode extends SeriesUnit {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         Episode episode = (Episode) o;
-        return getEpisodeKey() != null && Objects.equals(getEpisodeKey(), episode.getEpisodeKey());
+        return getId() != null && Objects.equals(getId(), episode.getId());
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(getEpisodeKey());
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }
