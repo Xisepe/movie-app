@@ -1,7 +1,7 @@
 create table genre
 (
-    id   serial primary key ,
-    name varchar(64)
+    id   serial primary key,
+    name varchar(64) unique
 );
 
-create index idx_genre_name on genre (name);
+create unique index idx_genre_name on genre (lower(name));

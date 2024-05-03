@@ -6,7 +6,7 @@ create table season
     avg_rating  integer,
     name        varchar(128),
     description varchar(128),
-    preview_id  integer references media_source (id),
-    series_id   integer references title (id),
-    ordinal integer not null
+    preview_id  integer references media_source (id) on delete set null,
+    series_id   integer references title (id) on delete cascade,
+    ordinal     integer not null
 );

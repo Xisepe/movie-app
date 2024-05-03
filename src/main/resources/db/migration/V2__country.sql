@@ -8,6 +8,8 @@ create table countries
     name    varchar(75)     not null
 );
 
+create index idx_countries_name on countries (lower(name));
+
 insert into countries (id, alpha_2, alpha_3, name)
 values (36, 'au', 'aus', 'Австралия'),
        (40, 'at', 'aut', 'Австрия'),
