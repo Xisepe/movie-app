@@ -15,6 +15,7 @@ public class PersonController {
 
     @PostMapping("/")
     public PersonDto createPerson(@RequestBody CreatePersonRequest request) {
+        return null;
 
     }
 

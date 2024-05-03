@@ -52,7 +52,7 @@ public class Title extends MediaEntity {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Enumerated(EnumType.STRING)
     @Column(name = "mpaa_rating")
     private MpaaRating mpaaRating;
 

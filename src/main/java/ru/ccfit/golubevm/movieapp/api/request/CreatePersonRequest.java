@@ -24,6 +24,5 @@ public class CreatePersonRequest implements Serializable {
     LocalDate dateOfBirth;
     @NotBlank
     String name;
-    @NotEmpty
     Set<Integer> crewRoleIds;
 }
