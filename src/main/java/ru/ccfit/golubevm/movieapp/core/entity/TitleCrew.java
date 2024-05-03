@@ -23,4 +23,12 @@ public class TitleCrew extends TitlePerson {
     )
     private Set<CrewRole> crewRoles = new LinkedHashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
+    private Person person;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "title_id")
+    private Title title;
+
 }

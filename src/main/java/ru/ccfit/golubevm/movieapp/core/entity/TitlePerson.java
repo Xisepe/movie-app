@@ -13,14 +13,6 @@ public class TitlePerson {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "title_id")
-    private Title title;
-
-    @ManyToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
-
     @Column(name = "order")
     private Integer order;
 }

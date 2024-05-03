@@ -1,15 +1,14 @@
 package ru.ccfit.golubevm.movieapp.core.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.dialect.PostgreSQLEnumJdbcType;
+import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -36,8 +35,13 @@ public class Title extends MediaEntity {
     @Column(name = "en_name")
     private String enName;
 
-    @OneToMany(mappedBy = "title", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "title_id")
     private Set<TitleCrew> titleCrews = new LinkedHashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "title_id")
+    private Set<TitleCast> titleCasts = new LinkedHashSet<>();
 
     @Column(name = "original_name")
     private String originalName;
@@ -67,4 +71,20 @@ public class Title extends MediaEntity {
             joinColumns = @JoinColumn(name = "title_id"),
             inverseJoinColumns = @JoinColumn(name = "genres_id"))
     private Set<Genre> genres = new LinkedHashSet<>();
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Title title = (Title) o;
+        return getId() != null && Objects.equals(getId(), title.getId());
+    }
+
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
 }

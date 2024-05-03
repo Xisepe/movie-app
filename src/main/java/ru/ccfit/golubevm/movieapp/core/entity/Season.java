@@ -13,11 +13,9 @@ import java.util.Set;
 @Entity
 @Table(name = "season")
 public class Season extends SeriesUnit {
-    @ManyToOne
-    @JoinColumn(name = "series_id")
-    private Series series;
 
-    @OneToMany(mappedBy = "season", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "season_id")
     private Set<Episode> episodes = new LinkedHashSet<>();
 
     @Override

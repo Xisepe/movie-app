@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,6 +37,21 @@ public class Person extends MediaPreview {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "person_crew_role",
+            joinColumns = {@JoinColumn(name = "person_id")},
+            inverseJoinColumns = {@JoinColumn(name = "crew_role_id")}
+    )
+    private Set<CrewRole> crewRoles;
+
+    @OneToMany(mappedBy = "person")
+    private Set<TitleCast> titleCasts = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "person")
+    private Set<TitleCrew> titleCrews = new LinkedHashSet<>();
+
 
     @Override
     public final boolean equals(Object o) {
