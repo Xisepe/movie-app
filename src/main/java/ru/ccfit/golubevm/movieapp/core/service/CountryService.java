@@ -13,4 +13,5 @@ public interface CountryService {
     Country getCountryByName(String name);
     List<Film> getFilmsByCountryId(Integer id);
     List<Series> getSeriesByCountryId(Integer id);
+    void deleteCountry(Integer id);
 }

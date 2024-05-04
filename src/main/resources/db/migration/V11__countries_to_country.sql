@@ -1,1 +1,0 @@
-alter table countries rename to country

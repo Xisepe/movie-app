@@ -1,6 +1,6 @@
-drop table if exists countries;
+drop table if exists country;
 
-create table countries
+create table country
 (
     id      int primary key not null,
     alpha_2 varchar(2)      not null,
@@ -8,9 +8,9 @@ create table countries
     name    varchar(75)     not null
 );
 
-create index idx_countries_name on countries (lower(name));
+create index idx_countries_name on country (lower(name));
 
-insert into countries (id, alpha_2, alpha_3, name)
+insert into country (id, alpha_2, alpha_3, name)
 values (36, 'au', 'aus', 'Австралия'),
        (40, 'at', 'aut', 'Австрия'),
        (31, 'az', 'aze', 'Азербайджан'),

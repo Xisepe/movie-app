@@ -53,4 +53,9 @@ public class CountryServiceImpl implements CountryService {
     public List<Series> getSeriesByCountryId(Integer id) {
         return null;
     }
+
+    @Override
+    public void deleteCountry(Integer id) {
+        countryRepository.deleteById(id);
+    }
 }

@@ -23,6 +23,11 @@ public class CountryController {
                 .collect(Collectors.toList());
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteCountry(@PathVariable Integer id) {
+        countryService.deleteCountry(id);
+    }
+
     @GetMapping("/")
     private CountryDto getCountry(
             @RequestParam(value = "id", required = false) Integer id,
