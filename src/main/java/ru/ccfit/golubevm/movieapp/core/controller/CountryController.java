@@ -19,7 +19,7 @@ public class CountryController {
     private List<CountryResponse> getAllCountries() {
         return countryService.getAllCountries()
                 .stream()
-                .map(countryMapper::toDto)
+                .map(countryMapper::countryToCountryResponse)
                 .collect(Collectors.toList());
     }
 
@@ -28,7 +28,7 @@ public class CountryController {
             @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "name", required = false) String name
     ) {
-        return countryMapper.toDto(countryService.getByIdOrName(id, name));
+        return countryMapper.countryToCountryResponse(countryService.getByIdOrName(id, name));
     }
 
 }

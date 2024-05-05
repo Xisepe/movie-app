@@ -17,17 +17,17 @@ public class CrewRoleController {
     private final CrewRoleMapper crewRoleMapper;
     @GetMapping("/{id}")
     public CrewRoleResponse getCrewRole(@PathVariable Integer id) {
-        return crewRoleMapper.toDto1(crewRoleService.getCrewRole(id));
+        return crewRoleMapper.toResponse(crewRoleService.getCrewRole(id));
     }
     @PostMapping("/")
     public CrewRoleResponse createCrewRole(@RequestBody @Valid CreateCrewRoleRequest request) {
         var role = crewRoleMapper.toEntity(request);
-        return crewRoleMapper.toDto1(crewRoleService.createCrewRole(role));
+        return crewRoleMapper.toResponse(crewRoleService.createCrewRole(role));
     }
     @PutMapping("/{id}")
     public CrewRoleResponse updateCrewRole(@PathVariable Integer id, @RequestBody @Valid UpdateCrewRoleRequest request) {
         var role = crewRoleMapper.toEntity(request);
-        return crewRoleMapper.toDto1(crewRoleService.updateCrewRole(id, role));
+        return crewRoleMapper.toResponse(crewRoleService.updateCrewRole(id, role));
     }
     @DeleteMapping("/{id}")
     public void deleteCrewRole(@PathVariable Integer id) {

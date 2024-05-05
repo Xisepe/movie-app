@@ -18,12 +18,12 @@ public class MediaSourceController {
     private final MediaSourceMapper mediaSourceMapper;
     @GetMapping("/{id}")
     public MediaSourceResponse getMedia(@PathVariable @NotNull Integer id) {
-        return mediaSourceMapper.mediaSourceToMediaSourceResponse(mediaSourceService.getMedia(id));
+        return mediaSourceMapper.toResponse(mediaSourceService.getMedia(id));
     }
     @PostMapping("/")
     public MediaSourceResponse createMedia(@Valid @RequestBody CreateMediaSourceRequest request) {
-        var media = mediaSourceMapper.createMediaSourceRequestToMediaSource(request);
-        return mediaSourceMapper.mediaSourceToMediaSourceResponse(
+        var media = mediaSourceMapper.toEntity(request);
+        return mediaSourceMapper.toResponse(
                 mediaSourceService.createMedia(
                         media
                 )
@@ -32,7 +32,7 @@ public class MediaSourceController {
     @PutMapping("/{id}")
     public MediaSourceResponse updateMedia(@PathVariable Integer id, @RequestBody @Valid MediaSourceUpdate request) {
         var media = mediaSourceMapper.toEntity(request);
-        return mediaSourceMapper.mediaSourceToMediaSourceResponse(mediaSourceService.updateMedia(id, media));
+        return mediaSourceMapper.toResponse(mediaSourceService.updateMedia(id, media));
     }
     @DeleteMapping("/{id}")
     public void deleteMedia(@PathVariable Integer id) {

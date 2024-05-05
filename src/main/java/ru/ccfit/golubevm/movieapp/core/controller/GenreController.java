@@ -22,24 +22,24 @@ public class GenreController {
 
     @GetMapping("/{id}")
     public GenreResponse getGenre(@PathVariable @NotNull Integer id) {
-        return genreMapper.toDto(genreService.getGenre(id));
+        return genreMapper.toResponse(genreService.getGenre(id));
     }
 
     @GetMapping("/")
     public List<GenreResponse> getAllGenres() {
-        return genreService.getAllGenres().stream().map(genreMapper::toDto).collect(Collectors.toList());
+        return genreService.getAllGenres().stream().map(genreMapper::toResponse).collect(Collectors.toList());
     }
 
     @PostMapping("/")
     public GenreResponse createGenre(@RequestBody @Valid CreateGenreRequest request) {
         var genre = genreMapper.toEntity(request);
-        return genreMapper.toDto(genreService.createGenre(genre));
+        return genreMapper.toResponse(genreService.createGenre(genre));
     }
 
     @PutMapping("/{id}")
     public GenreResponse updateGenre(@PathVariable Integer id, @RequestBody @Valid UpdateGenreRequest request) {
         var genre = genreMapper.toEntity(request);
-        return genreMapper.toDto(genreService.updateGenre(id, genre));
+        return genreMapper.toResponse(genreService.updateGenre(id, genre));
     }
 
     @DeleteMapping("/{id}")
