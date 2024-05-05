@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.ccfit.golubevm.movieapp.api.request.CreatePersonRequest;
 import ru.ccfit.golubevm.movieapp.api.request.UpdatePersonRequest;
 import ru.ccfit.golubevm.movieapp.api.response.PersonResponse;
+import ru.ccfit.golubevm.movieapp.core.mapper.CrewRoleMapper;
 import ru.ccfit.golubevm.movieapp.core.mapper.PersonMapper;
 import ru.ccfit.golubevm.movieapp.core.service.PersonService;
 
@@ -15,6 +16,7 @@ import ru.ccfit.golubevm.movieapp.core.service.PersonService;
 public class PersonController {
     private final PersonService personService;
     private final PersonMapper personMapper;
+    private final CrewRoleMapper crewRoleMapper;
 
     @GetMapping("/{id}")
     public PersonResponse getPerson(@PathVariable Integer id) {
@@ -24,6 +26,12 @@ public class PersonController {
     public PersonResponse createPerson(@RequestBody @Valid CreatePersonRequest request) {
         var person = personMapper.toEntity(request);
         return personMapper.toPersonResponse(personService.createPerson(person));
+    }
+    @PatchMapping("/{id}/crew-roles")
+    public PersonResponse addCrewRole(@PathVariable Integer id, @RequestParam("roleId") Integer roleId) {
+        var crewRole = crewRoleMapper.idToRef(roleId);
+        var person = personService.addCrewRole(id, crewRole);
+        return personMapper.toPersonResponse(person);
     }
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable Integer id) {
