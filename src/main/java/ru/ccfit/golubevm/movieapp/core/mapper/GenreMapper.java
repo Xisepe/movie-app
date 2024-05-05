@@ -14,7 +14,6 @@ public interface GenreMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Genre partialUpdate(GenreResponse genreResponse, @MappingTarget Genre genre);
-
     Genre toEntity(CreateGenreRequest createGenreRequest);
 
     CreateGenreRequest toDto1(Genre genre);

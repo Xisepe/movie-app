@@ -9,7 +9,7 @@ import java.io.Serializable;
  * DTO for {@link ru.ccfit.golubevm.movieapp.core.entity.CrewRole}
  */
 @Value
-public class CreateCrewRoleRequest implements Serializable {
+public class UpdateCrewRoleRequest implements Serializable {
     @NotBlank
     String name;
 }
