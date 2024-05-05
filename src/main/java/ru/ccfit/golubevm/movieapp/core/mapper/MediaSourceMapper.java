@@ -1,9 +1,6 @@
 package ru.ccfit.golubevm.movieapp.core.mapper;
 
-import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 import ru.ccfit.golubevm.movieapp.MediaSourceUpdate;
 import ru.ccfit.golubevm.movieapp.api.request.CreateMediaSourceRequest;
 import ru.ccfit.golubevm.movieapp.api.response.MediaSourceResponse;
