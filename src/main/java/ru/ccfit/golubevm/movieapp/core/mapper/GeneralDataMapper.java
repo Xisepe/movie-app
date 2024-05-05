@@ -1,4 +1,4 @@
-package ru.ccfit.golubevm.movieapp.core.service.mapper;
+package ru.ccfit.golubevm.movieapp.core.mapper;
 
 import org.mapstruct.*;
 import ru.ccfit.golubevm.movieapp.api.CountryDto;

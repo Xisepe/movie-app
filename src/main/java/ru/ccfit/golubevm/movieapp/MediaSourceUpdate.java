@@ -1,4 +1,4 @@
-package ru.ccfit.golubevm.movieapp.api.request;
+package ru.ccfit.golubevm.movieapp;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
@@ -11,7 +11,7 @@ import java.net.URL;
  * DTO for {@link ru.ccfit.golubevm.movieapp.core.entity.MediaSource}
  */
 @Value
-public class CreateMediaSourceRequest implements Serializable {
+public class MediaSourceUpdate implements Serializable {
     @NotNull
     URL url;
     @NotNull

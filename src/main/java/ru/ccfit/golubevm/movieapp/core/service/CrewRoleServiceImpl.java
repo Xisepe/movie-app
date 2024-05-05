@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.ccfit.golubevm.movieapp.api.request.CreateCrewRoleRequest;
 import ru.ccfit.golubevm.movieapp.core.entity.CrewRole;
-import ru.ccfit.golubevm.movieapp.core.exceptions.CrewRoleNotfound;
+import ru.ccfit.golubevm.movieapp.core.exceptions.CrewRoleNotfoundException;
 import ru.ccfit.golubevm.movieapp.core.repository.CrewRoleRepository;
 
 import java.util.List;
@@ -24,12 +24,12 @@ public class CrewRoleServiceImpl implements CrewRoleService {
 
     @Override
     public CrewRole getCrewRoleById(Integer id) {
-        return crewRoleRepository.findById(id).orElseThrow(() -> new CrewRoleNotfound(id));
+        return crewRoleRepository.findById(id).orElseThrow(() -> new CrewRoleNotfoundException(id));
     }
 
     @Override
     public CrewRole findCrewRoleByName(String name) {
-        return crewRoleRepository.findCrewRoleByName(name).orElseThrow(() -> new CrewRoleNotfound(name));
+        return crewRoleRepository.findCrewRoleByName(name).orElseThrow(() -> new CrewRoleNotfoundException(name));
     }
 
     @Override

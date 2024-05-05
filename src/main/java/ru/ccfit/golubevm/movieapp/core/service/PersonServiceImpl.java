@@ -7,9 +7,8 @@ import ru.ccfit.golubevm.movieapp.api.request.CreatePersonRequest;
 import ru.ccfit.golubevm.movieapp.core.entity.MediaSource;
 import ru.ccfit.golubevm.movieapp.core.entity.MediaType;
 import ru.ccfit.golubevm.movieapp.core.entity.Person;
-import ru.ccfit.golubevm.movieapp.core.entity.PersonDto;
 import ru.ccfit.golubevm.movieapp.core.repository.*;
-import ru.ccfit.golubevm.movieapp.core.service.mapper.PersonMapper;
+import ru.ccfit.golubevm.movieapp.core.mapper.PersonMapper;
 
 import java.util.stream.Collectors;
 

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.ccfit.golubevm.movieapp.api.CountryDto;
 import ru.ccfit.golubevm.movieapp.core.service.CountryService;
-import ru.ccfit.golubevm.movieapp.core.service.mapper.GeneralDataMapper;
+import ru.ccfit.golubevm.movieapp.core.mapper.GeneralDataMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

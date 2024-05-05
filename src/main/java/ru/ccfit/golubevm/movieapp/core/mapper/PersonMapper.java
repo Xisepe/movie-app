@@ -1,8 +1,6 @@
-package ru.ccfit.golubevm.movieapp.core.service.mapper;
+package ru.ccfit.golubevm.movieapp.core.mapper;
 
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.ccfit.golubevm.movieapp.api.request.CreatePersonRequest;
