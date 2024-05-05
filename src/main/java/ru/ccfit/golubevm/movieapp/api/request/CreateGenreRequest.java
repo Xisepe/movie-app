@@ -1,4 +1,4 @@
-package ru.ccfit.golubevm.movieapp;
+package ru.ccfit.golubevm.movieapp.api.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Value;
