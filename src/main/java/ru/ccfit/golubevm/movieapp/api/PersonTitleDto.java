@@ -1,6 +1,7 @@
 package ru.ccfit.golubevm.movieapp.api;
 
 import lombok.Value;
+import ru.ccfit.golubevm.movieapp.api.response.MediaSourceResponse;
 
 import java.io.Serializable;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
  */
 @Value
 public class PersonTitleDto implements Serializable {
-    MediaSourceDto preview;
+    MediaSourceResponse preview;
     Integer id;
     String ruName;
     String enName;

@@ -6,25 +6,30 @@ import org.springframework.stereotype.Service;
 import ru.ccfit.golubevm.movieapp.api.request.CreatePersonRequest;
 import ru.ccfit.golubevm.movieapp.core.entity.MediaSource;
 import ru.ccfit.golubevm.movieapp.core.entity.MediaType;
+import ru.ccfit.golubevm.movieapp.core.entity.Person;
 import ru.ccfit.golubevm.movieapp.core.entity.PersonDto;
 import ru.ccfit.golubevm.movieapp.core.repository.*;
 import ru.ccfit.golubevm.movieapp.core.service.mapper.PersonMapper;
+
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
     private final PersonMapper personMapper;
-    private final PersonRepository personRepository;
     private final CrewRoleRepository crewRoleRepository;
     private final CountryRepository countryRepository;
+
     @Transactional
     @Override
-    public PersonDto createPerson(CreatePersonRequest request) {
+    public Person createPerson(CreatePersonRequest request) {
         var person = personMapper.createPersonRequestToPerson(request);
-        var roles = crewRoleRepository.findAllByIdIn(request.getCrewRoleIds());
+        var roles = request.getCrewRoleIds().stream()
+                .map(crewRoleRepository::getReferenceById)
+                .collect(Collectors.toSet());
         person.setCrewRoles(roles);
         if (request.getCountryId() != null) {
-            var country = countryRepository.findById(request.getCountryId()).orElseThrow();
+            var country = countryRepository.getReferenceById(request.getCountryId());
             person.setCitizenship(country);
         }
         if (request.getPreviewUrl() != null) {
@@ -33,6 +38,6 @@ public class PersonServiceImpl implements PersonService {
             mediaSource.setUrl(request.getPreviewUrl());
             person.setPreview(mediaSource);
         }
-        return personMapper.personToPersonDto(personRepository.save(person));
+
     }
 }

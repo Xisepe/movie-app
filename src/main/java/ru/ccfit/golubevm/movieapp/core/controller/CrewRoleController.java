@@ -33,4 +33,8 @@ public class CrewRoleController {
                 .map(generalDataMapper::crewRoleToCrewRoleDto)
                 .collect(Collectors.toList());
     }
+    @DeleteMapping("/{id}")
+    public void deleteCrewRole(@PathVariable("id") Integer id) {
+        crewRoleService.deleteCrewRole(id);
+    }
 }

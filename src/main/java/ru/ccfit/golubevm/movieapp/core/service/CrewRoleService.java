@@ -11,4 +11,5 @@ public interface CrewRoleService {
     CrewRole getCrewRoleById(Integer id);
     CrewRole findCrewRoleByName(String name);
     List<CrewRole> getAllCrewRoles();
+    void deleteCrewRole(Integer id);
 }

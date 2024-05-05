@@ -2,6 +2,7 @@ package ru.ccfit.golubevm.movieapp.core.entity;
 
 import lombok.Value;
 import ru.ccfit.golubevm.movieapp.api.*;
+import ru.ccfit.golubevm.movieapp.api.response.MediaSourceResponse;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 @Value
 public class PersonDto implements Serializable {
-    MediaSourceDto preview;
+    MediaSourceResponse preview;
     Integer id;
     CountryDto citizenship;
     String placeOfBirth;

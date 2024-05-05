@@ -2,10 +2,13 @@ package ru.ccfit.golubevm.movieapp.core.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.ccfit.golubevm.movieapp.api.MediaSourceDto;
+import ru.ccfit.golubevm.movieapp.api.response.MediaSourceResponse;
 import ru.ccfit.golubevm.movieapp.api.request.CreateMediaSourceRequest;
 import ru.ccfit.golubevm.movieapp.core.entity.MediaSource;
+import ru.ccfit.golubevm.movieapp.core.entity.MediaType;
 import ru.ccfit.golubevm.movieapp.core.repository.MediaSourceRepository;
+
+import java.net.URL;
 
 @Service
 @RequiredArgsConstructor
@@ -32,11 +35,19 @@ public class MediaSourceServiceImpl implements MediaSourceService {
     }
 
     @Override
-    public MediaSource updateMedia(MediaSourceDto dto) {
+    public MediaSource updateMedia(MediaSourceResponse dto) {
         var media = mediaSourceRepository.getReferenceById(dto.getId());
         media.setUrl(dto.getUrl());
         media.setMediaType(dto.getMediaType());
         mediaSourceRepository.save(media);
+        return media;
+    }
+
+    @Override
+    public MediaSource createWithUrl(URL url, MediaType mediaType) {
+        var media = new MediaSource();
+        media.setMediaType(mediaType);;
+        media.setUrl(url);
         return media;
     }
 }
