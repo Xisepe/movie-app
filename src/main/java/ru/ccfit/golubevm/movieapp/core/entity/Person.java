@@ -38,7 +38,7 @@ public class Person extends MediaPreview {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "person_crew_role",
             joinColumns = {@JoinColumn(name = "person_id")},
