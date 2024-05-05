@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.ccfit.golubevm.movieapp.api.CrewRoleDto;
 import ru.ccfit.golubevm.movieapp.api.request.CreateCrewRoleRequest;
 import ru.ccfit.golubevm.movieapp.core.service.CrewRoleService;
-import ru.ccfit.golubevm.movieapp.core.mapper.GeneralDataMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

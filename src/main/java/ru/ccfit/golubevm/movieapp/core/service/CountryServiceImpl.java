@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.ccfit.golubevm.movieapp.core.entity.Country;
 import ru.ccfit.golubevm.movieapp.core.entity.Film;
 import ru.ccfit.golubevm.movieapp.core.entity.Series;
+import ru.ccfit.golubevm.movieapp.core.exceptions.CountryNotFoundException;
 import ru.ccfit.golubevm.movieapp.core.repository.CountryRepository;
 
 import java.util.List;
@@ -19,9 +20,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country getByIdOrName(Integer id, String name) {
-        if (id == null && name == null) {
-            throw new IllegalArgumentException();
-        }
         if (id != null) {
             return getCountryById(id);
         } else {
@@ -31,8 +29,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country getCountryById(Integer id) {
-        //todo nosuchcountryexception
-        return countryRepository.findById(id).orElseThrow();
+        return countryRepository.findById(id)
+                .orElseThrow(() -> new CountryNotFoundException(id));
     }
 
     @Override
@@ -41,21 +39,6 @@ public class CountryServiceImpl implements CountryService {
                 .findCountryByName(
                         name.toLowerCase()
                 )
-                .orElseThrow();
-    }
-
-    @Override
-    public List<Film> getFilmsByCountryId(Integer id) {
-        return null;
-    }
-
-    @Override
-    public List<Series> getSeriesByCountryId(Integer id) {
-        return null;
-    }
-
-    @Override
-    public void deleteCountry(Integer id) {
-        countryRepository.deleteById(id);
+                .orElseThrow(() -> new CountryNotFoundException(name));
     }
 }
