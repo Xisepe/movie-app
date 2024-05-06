@@ -1,6 +1,8 @@
 package ru.ccfit.golubevm.movieapp.core.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,7 @@ public class TitlePerson {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "order")
+    @Positive
+    @Column(name = "order", nullable = false)
     private Integer order;
 }

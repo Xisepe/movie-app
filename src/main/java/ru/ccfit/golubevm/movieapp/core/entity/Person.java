@@ -47,9 +47,11 @@ public class Person extends MediaPreview {
     private Set<CrewRole> crewRoles;
 
     @OneToMany(mappedBy = "person")
+    @OrderBy("order asc")
     private Set<TitleCast> titleCasts = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "person")
+    @OrderBy("order asc")
     private Set<TitleCrew> titleCrews = new LinkedHashSet<>();
 
 

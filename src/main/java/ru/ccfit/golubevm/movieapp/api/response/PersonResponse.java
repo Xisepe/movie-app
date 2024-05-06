@@ -20,6 +20,4 @@ public class PersonResponse implements Serializable {
     LocalDate dateOfBirth;
     String name;
     Set<CrewRoleResponse> crewRoles;
-    Set<TitleCastPersonResponse> titleCasts;
-    Set<TitleCrewPersonResponse> titleCrews;
 }

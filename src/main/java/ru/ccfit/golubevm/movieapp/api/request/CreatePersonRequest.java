@@ -1,6 +1,5 @@
 package ru.ccfit.golubevm.movieapp.api.request;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -12,14 +11,11 @@ import java.util.Set;
  */
 @Value
 public class CreatePersonRequest implements Serializable {
-    Integer previewId;
+    CreateMediaSourceRequest preview;
     Integer citizenshipId;
     String placeOfBirth;
     LocalDate dateOfDeath;
     LocalDate dateOfBirth;
-    @NotBlank
     String name;
     Set<Integer> crewRoleIds;
-    Set<Integer> titleCastIds;
-    Set<Integer> titleCrewIds;
 }

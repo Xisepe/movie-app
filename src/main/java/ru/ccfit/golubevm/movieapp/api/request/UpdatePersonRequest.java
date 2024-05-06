@@ -12,14 +12,11 @@ import java.util.Set;
  */
 @Value
 public class UpdatePersonRequest implements Serializable {
-    Integer previewId;
+    CreateMediaSourceRequest preview;
     Integer citizenshipId;
     String placeOfBirth;
     LocalDate dateOfDeath;
     LocalDate dateOfBirth;
-    @NotBlank
     String name;
     Set<Integer> crewRoleIds;
-    Set<Integer> titleCastIds;
-    Set<Integer> titleCrewIds;
 }
