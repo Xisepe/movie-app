@@ -13,7 +13,8 @@ create table title
     mpaa_rating         mpaa_rating,
     age_constraint      integer,
     duration            integer,
-    original_country_id int references country (id) on delete set null
+    original_country_id int references country (id) on delete set null,
+    total_season        int not null check ( total_season >= 0 ) default 0
 );
 
 create table title_genres

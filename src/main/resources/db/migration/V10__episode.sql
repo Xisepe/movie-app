@@ -8,5 +8,5 @@ create table episode
     name        varchar(128),
     description varchar(128),
     preview_id  int     references media_source (id) on delete set null,
-    ordinal     integer not null
+    ordinal     integer not null check ( ordinal > 0 )
 );
