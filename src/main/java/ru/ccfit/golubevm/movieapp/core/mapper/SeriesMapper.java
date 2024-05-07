@@ -1,11 +1,10 @@
 package ru.ccfit.golubevm.movieapp.core.mapper;
 
 import org.mapstruct.*;
-import ru.ccfit.golubevm.movieapp.CreateSeriesRequest;
+import ru.ccfit.golubevm.movieapp.api.request.CreateSeriesRequest;
+import ru.ccfit.golubevm.movieapp.SeriesResponse;
+import ru.ccfit.golubevm.movieapp.api.response.SlimSeriesResponse;
 import ru.ccfit.golubevm.movieapp.core.entity.*;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mapper(
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -16,15 +15,15 @@ import java.util.stream.Collectors;
                 TitleCastMapper.class,
                 CountryMapper.class,
                 GenreMapper.class,
-                SeasonMapper.class
+                SeasonMapper.class,
+                MediaSourceMapper.class
         }
 )
 public interface SeriesMapper extends IdToReferenceMapper<Integer, Series> {
-    @Mapping(source = "titleCrewIds", target = "titleCrews")
-    @Mapping(source = "titleCastIds", target = "titleCasts")
-    @Mapping(source = "originalCountryId", target = "originalCountry")
-    @Mapping(source = "genreIds", target = "genres")
-    @Mapping(source = "seasonIds", target = "seasons")
-    Series toEntity(CreateSeriesRequest dto);
+
+    Series toSeries(CreateSeriesRequest dto);
+    SlimSeriesResponse toSlimSeriesResponse(Series series);
+
+    SeriesResponse toSeriesResponse(Series series);
 
 }

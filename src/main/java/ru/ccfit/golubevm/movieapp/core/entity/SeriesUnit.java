@@ -1,6 +1,7 @@
 package ru.ccfit.golubevm.movieapp.core.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +29,8 @@ public class SeriesUnit extends MediaPreview {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "ordinal")
+    @Positive
+    @Column(name = "ordinal", nullable = false)
     private Integer ordinal;
 
 }

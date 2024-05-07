@@ -13,6 +13,11 @@ import ru.ccfit.golubevm.movieapp.core.entity.Genre;
 )
 public interface GenreMapper extends IdToReferenceMapper<Integer, Genre> {
     GenreResponse toResponse(Genre genre);
+
     Genre toEntity(CreateGenreRequest createGenreRequest);
+
     Genre toEntity(UpdateGenreRequest updateGenreRequest);
+
+    Genre toEntity(GenreResponse genreResponse);
+
 }

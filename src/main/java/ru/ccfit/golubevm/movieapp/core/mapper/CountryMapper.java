@@ -11,4 +11,6 @@ import ru.ccfit.golubevm.movieapp.core.entity.Country;
 )
 public interface CountryMapper extends IdToReferenceMapper<Integer, Country> {
     CountryResponse countryToCountryResponse(Country country);
+
+    Country toEntity(CountryResponse countryResponse);
 }

@@ -11,7 +11,7 @@ import java.net.URL;
  * DTO for {@link ru.ccfit.golubevm.movieapp.core.entity.MediaSource}
  */
 @Value
-public class MediaSourceUpdate implements Serializable {
+public class UpdateMediaSourceRequest implements Serializable {
     @NotNull
     URL url;
     @NotNull

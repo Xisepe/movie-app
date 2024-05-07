@@ -1,9 +1,13 @@
-package ru.ccfit.golubevm.movieapp;
+package ru.ccfit.golubevm.movieapp.api.request;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
+import ru.ccfit.golubevm.movieapp.api.request.CreateMediaSourceRequest;
+import ru.ccfit.golubevm.movieapp.api.request.CreateTitleCastRequest;
+import ru.ccfit.golubevm.movieapp.api.request.CreateTitleCrewRequest;
 import ru.ccfit.golubevm.movieapp.core.entity.MpaaRating;
 
 import java.io.Serializable;
@@ -15,16 +19,12 @@ import java.util.Set;
  */
 @Value
 public class CreateSeriesRequest implements Serializable {
-    @Positive
-    Integer previewId;
-    Set<@Positive Integer> mediaContentIds;
-    Integer id;
+    CreateMediaSourceRequest preview;
+    Set<CreateMediaSourceRequest> mediaContent;
     @Size(max = 128)
     String ruName;
     @Size(max = 128)
     String enName;
-    Set<@Positive Integer> titleCrewIds;
-    Set<@Positive Integer> titleCastIds;
     @NotBlank
     @Size(max = 128)
     String originalName;
@@ -36,8 +36,6 @@ public class CreateSeriesRequest implements Serializable {
     Integer ageConstraint;
     @Positive
     Integer duration;
-    @Positive
-    Integer originalCountryId;
-    Set<@Positive Integer> genreIds;
-    Set<@Positive Integer> seasonIds;
+    Set<CreateTitleCrewRequest> titleCrews;
+    Set<CreateTitleCastRequest> titleCasts;
 }

@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.ccfit.golubevm.movieapp.api.request.MediaSourceUpdate;
+import ru.ccfit.golubevm.movieapp.api.request.UpdateMediaSourceRequest;
 import ru.ccfit.golubevm.movieapp.api.request.CreateMediaSourceRequest;
 import ru.ccfit.golubevm.movieapp.api.response.MediaSourceResponse;
 import ru.ccfit.golubevm.movieapp.core.mapper.MediaSourceMapper;
@@ -30,7 +30,7 @@ public class MediaSourceController {
         );
     }
     @PutMapping("/{id}")
-    public MediaSourceResponse updateMedia(@PathVariable Integer id, @RequestBody @Valid MediaSourceUpdate request) {
+    public MediaSourceResponse updateMedia(@PathVariable Integer id, @RequestBody @Valid UpdateMediaSourceRequest request) {
         var media = mediaSourceMapper.toEntity(request);
         return mediaSourceMapper.toResponse(mediaSourceService.updateMedia(id, media));
     }

@@ -27,50 +27,65 @@ public class Title extends MediaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    protected Integer id;
 
     @Column(name = "ru_name")
-    private String ruName;
+    protected String ruName;
 
     @Column(name = "en_name")
-    private String enName;
+    protected String enName;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "title_id")
-    private Set<TitleCrew> titleCrews = new LinkedHashSet<>();
+    @OrderBy("order asc")
+    protected Set<TitleCrew> titleCrews = new LinkedHashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "title_id")
-    private Set<TitleCast> titleCasts = new LinkedHashSet<>();
+    @OrderBy("order asc")
+    protected Set<TitleCast> titleCasts = new LinkedHashSet<>();
 
     @Column(name = "original_name")
-    private String originalName;
+    protected String originalName;
 
     @Column(name = "tagline")
-    private String tagline;
+    protected String tagline;
 
     @Column(name = "release_date")
-    private LocalDate releaseDate;
+    protected LocalDate releaseDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "mpaa_rating")
-    private MpaaRating mpaaRating;
+    protected MpaaRating mpaaRating;
 
     @Column(name = "age_constraint")
-    private Integer ageConstraint;
+    protected Integer ageConstraint;
 
     @Column(name = "duration")
-    private Integer duration;
+    protected Integer duration;
 
     @ManyToOne
     @JoinColumn(name = "original_country_id")
-    private Country originalCountry;
+    protected Country originalCountry;
 
     @ManyToMany
     @JoinTable(name = "title_genres",
             joinColumns = @JoinColumn(name = "title_id"),
             inverseJoinColumns = @JoinColumn(name = "genres_id"))
-    private Set<Genre> genres = new LinkedHashSet<>();
+    protected Set<Genre> genres = new LinkedHashSet<>();
+
+    public void addMediaContent(Set<MediaSource> mediaSources) {
+        this.mediaContent.addAll(mediaSources);
+    }
+    public void addTitleCast(Set<TitleCast> titleCasts) {
+        titleCasts.forEach(e->e.setTitle(this));
+        this.titleCasts.addAll(titleCasts);
+    }
+
+    public void addTitleCrew(Set<TitleCrew> titleCrews) {
+        titleCrews.forEach(e->e.setTitle(this));
+        this.titleCrews.addAll(titleCrews);
+    }
 
     @Override
     public final boolean equals(Object o) {

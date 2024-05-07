@@ -2,8 +2,8 @@ create table season
 (
     id          serial primary key,
     tagline     varchar(128),
-    total_votes integer,
-    avg_rating  integer,
+    total_votes integer default 0 check ( total_votes >= 0 ),
+    avg_rating  integer default 0 check ( avg_rating >= 0 ),
     name        varchar(128),
     description varchar(128),
     preview_id  integer references media_source (id) on delete set null,

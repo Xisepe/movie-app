@@ -13,10 +13,13 @@ import java.util.Set;
 @Entity
 @Table(name = "season")
 public class Season extends SeriesUnit {
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "season_id")
     private Set<Episode> episodes = new LinkedHashSet<>();
+
+    public void addEpisode(Set<Episode> episodes) {
+        this.episodes.addAll(episodes);
+    }
 
     @Override
     public final boolean equals(Object o) {
