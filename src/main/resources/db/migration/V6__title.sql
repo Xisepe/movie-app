@@ -14,8 +14,13 @@ create table title
     age_constraint      integer,
     duration            integer,
     original_country_id int references country (id) on delete set null,
-    total_season        int not null check ( total_season >= 0 ) default 0
+    total_season        int default 0 check ( total_season >= 0 )
 );
+
+create index idx_title_ru_name on title (ru_name);
+create index idx_title_en_name on title (en_name);
+create index idx_title_original_name on title (original_name);
+create index idx_title_release_date on title (release_date);
 
 create table title_genres
 (

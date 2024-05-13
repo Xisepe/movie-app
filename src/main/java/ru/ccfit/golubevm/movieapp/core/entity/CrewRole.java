@@ -9,9 +9,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "crew_role", indexes = {
-        @Index(name = "idx_crew_role_name", columnList = "name")
-})
+@Table(name = "crew_role")
 public class CrewRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

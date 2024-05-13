@@ -2,7 +2,6 @@ plugins {
     java
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
-    id("org.flywaydb.flyway") version "10.7.1"
 }
 
 group = "ru.ccfit.golubevm"
@@ -29,14 +28,6 @@ repositories {
     mavenCentral()
 }
 
-flyway {
-    url = "jdbc:postgresql://localhost:5432/db_project"
-    user = "xisepe"
-    password = "admin"
-    schemas = arrayOf("public")
-    cleanDisabled = false
-}
-
 dependencies {
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
@@ -56,13 +47,25 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
-//    implementation("org.flywaydb:flyway-core")
+
+    implementation("org.flywaydb:flyway-core:10.7.1")
+    implementation("org.flywaydb:flyway-database-postgresql:10.7.1")
+
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
-//    implementation("org.flywaydb:flyway-database-postgresql:10.7.1")
     annotationProcessor("org.projectlombok:lombok")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
+    // https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter
+    testImplementation("org.testcontainers:junit-jupiter:1.19.7")
+    // https://mvnrepository.com/artifact/org.testcontainers/postgresql
+    testImplementation("org.testcontainers:postgresql:1.19.7")
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+
+
+
+//    testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<Test> {

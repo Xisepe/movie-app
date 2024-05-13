@@ -2,25 +2,21 @@ package ru.ccfit.golubevm.movieapp.core.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ccfit.golubevm.movieapp.core.entity.*;
-import ru.ccfit.golubevm.movieapp.core.exceptions.NotFoundException;
 import ru.ccfit.golubevm.movieapp.core.exceptions.SeasonNotFoundException;
 import ru.ccfit.golubevm.movieapp.core.exceptions.SeriesNotFoundException;
-import ru.ccfit.golubevm.movieapp.core.mapper.SeriesMapper;
 import ru.ccfit.golubevm.movieapp.core.repository.SeasonRepository;
 import ru.ccfit.golubevm.movieapp.core.repository.SeriesRepository;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
     private final SeriesRepository seriesRepository;
-    private final SpecService specService;
+    //    private final SpecService specService;
     private final SortService sortService;
     private final SeasonRepository seasonRepository;
 
@@ -90,12 +86,33 @@ public class SeriesServiceImpl implements SeriesService {
                 .orElseThrow(() -> new SeriesNotFoundException(id));
     }
 
+    @Transactional
+    @Override
+    public Set<Season> getSeasons(Integer id) {
+        return getSeries(id).getSeasons();
+    }
+
+    private void throwNotFoundIfSeriesNotExist(Integer id) {
+        if (!seriesRepository.existsById(id))
+            throw new SeriesNotFoundException(id);
+    }
+
+    @Override
+    public Season getSeason(Integer id, Integer seasonId) {
+        var series = getSeries(id);
+        return series.getSeasons().stream()
+                .filter(e -> e.getId().equals(seasonId))
+                .findAny()
+                .orElseThrow(() -> new SeasonNotFoundException(seasonId));
+    }
+
     @Override
     public Page<Series> getAllSeriesByFilterAndPageAndSort(String filter, int size, int page, String sort) {
-        var spec = specService.buildSpecification(filter, Series.class);
-        var srt = sortService.buildSort(sort);
-        var pgReq = PageRequest.of(page, size, srt);
-        return spec == null ? seriesRepository.findAll(pgReq) : seriesRepository.findAll(spec, pgReq);
+//        var spec = specService.buildSpecification(filter, Series.class);
+//        var srt = sortService.buildSort(sort);
+//        var pgReq = PageRequest.of(page, size, srt);
+//        return spec == null ? seriesRepository.findAll(pgReq) : seriesRepository.findAll(spec, pgReq);
+        return null;
     }
 
     @Override

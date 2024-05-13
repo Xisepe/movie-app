@@ -2,6 +2,7 @@ package ru.ccfit.golubevm.movieapp.api.response;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -13,8 +14,8 @@ import java.io.Serializable;
 public class CountryResponse implements Serializable {
     @NotNull
     Integer id;
-    @NotBlank
+    @NotBlank @Size(max = 2)
     String alpha2;
-    @NotBlank
+    @NotBlank @Size(max = 75)
     String name;
 }

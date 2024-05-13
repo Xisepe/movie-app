@@ -11,6 +11,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "episode")
 public class Episode extends SeriesUnit {
+    @ManyToOne
+    private Season season;
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

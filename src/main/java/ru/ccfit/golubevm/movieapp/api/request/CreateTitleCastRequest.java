@@ -1,6 +1,7 @@
 package ru.ccfit.golubevm.movieapp.api.request;
 
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -12,7 +13,10 @@ import java.io.Serializable;
 public class CreateTitleCastRequest implements Serializable {
     @Positive
     Integer order;
+    @Size(max = 128)
     String characterName;
+    @Positive
     Integer personId;
+    @Positive
     Integer titleId;
 }

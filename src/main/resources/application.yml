@@ -13,10 +13,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  flyway:
-    user: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    url: ${SPRING_DATASOURCE_URL}
+spring.flyway:
+  user: ${SPRING_DATASOURCE_USERNAME}
+  password: ${SPRING_DATASOURCE_PASSWORD}
+  url: ${SPRING_DATASOURCE_URL}
+  default-schema: public
+  create-schemas: true
 server:
   servlet:
     context-path: /api

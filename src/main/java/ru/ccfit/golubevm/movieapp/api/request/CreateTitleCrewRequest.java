@@ -1,5 +1,7 @@
 package ru.ccfit.golubevm.movieapp.api.request;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -10,8 +12,12 @@ import java.util.Set;
  */
 @Value
 public class CreateTitleCrewRequest implements Serializable {
+    @Positive
     Integer order;
-    Set<Integer> crewRoleIds;
+    @Valid
+    Set<@Positive Integer> crewRoleIds;
+    @Positive
     Integer personId;
+    @Positive
     Integer titleId;
 }

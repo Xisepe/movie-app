@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+spring.flyway:
+  default-schema: public
+  create-schemas: true
+server:
+  servlet:
+    context-path: /api

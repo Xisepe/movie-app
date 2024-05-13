@@ -16,6 +16,23 @@ public interface SeriesService {
     Set<Episode> createEpisode(Integer seriesId, Integer seasonId, Set<Episode> episodes);
 
     Series getSeries(Integer id);
+    Set<Season> getSeasons(Integer id);
+    Season getSeason(Integer id, Integer seasonId);
+//    Set<Episode> getEpisodes(Integer id, Integer seasonId);
+//    Episode getEpisode(Integer id, Integer seasonId, Integer episodeId);
+//    Set<MediaSource> getMediaContent(Integer id);
+//    MediaSource getPreview(Integer id);
+
+    void deleteSeries(Integer id);
+//    void deleteSeasons(Integer id);
+//    void deleteSeason(Integer id, Integer seasonId);
+//    void deleteEpisodes(Integer id, Integer seasonId);
+//    void deleteEpisode(Integer id, Integer seasonId, Integer episodeId);
+//    void deletePreview(Integer id);
+//    void deleteMediaContent(Integer id);
+//    void deleteMediaContent(Integer id, Integer mediaSourceId);
+
+
     Page<Series> getAllSeriesByFilterAndPageAndSort(String filter, int size, int page, String sort);
 //    MediaSource getPreview(Integer id);
 //    Set<MediaSource> getContent(Integer id);
@@ -27,6 +44,5 @@ public interface SeriesService {
 //    Episode getEpisode(Integer id, Integer seasonId, Integer episodeId);
 
     Series updateSeries(Integer id, Series series);
-    void deleteSeries(Integer id);
 
 }

@@ -1,7 +1,6 @@
 package ru.ccfit.golubevm.movieapp.core.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,9 +16,8 @@ public class Series extends Title {
     @OrderBy("ordinal asc")
     private Set<Season> seasons = new LinkedHashSet<>();
 
-    @Column(name = "total_season", nullable = false)
-    @PositiveOrZero
-    Integer totalSeason = 0;
+    @Column(name = "total_season")
+    Integer totalSeason;
 
     public void addSeason(Set<Season> seasons) {
         this.seasons.addAll(seasons);

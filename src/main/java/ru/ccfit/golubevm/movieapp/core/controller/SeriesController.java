@@ -1,19 +1,24 @@
 package ru.ccfit.golubevm.movieapp.core.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.ccfit.golubevm.movieapp.api.request.*;
-import ru.ccfit.golubevm.movieapp.SeriesResponse;
+import ru.ccfit.golubevm.movieapp.api.response.SeriesResponse;
 import ru.ccfit.golubevm.movieapp.api.response.*;
 import ru.ccfit.golubevm.movieapp.core.mapper.*;
 import ru.ccfit.golubevm.movieapp.core.service.SeriesService;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -27,7 +32,20 @@ public class SeriesController {
     private final TitleCrewMapper titleCrewMapper;
     private final TitleCastMapper titleCastMapper;
     private final EpisodeMapper episodeMapper;
-
+    @Operation(
+            summary = "Create new series record",
+            description = "Create new series and also passed nested requests to create series preview, media content, seasons and episodes. Also you can create crew and cast."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully created new series and its nested models",
+                            content = {@Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = SeriesResponse.class))}
+                    )
+            }
+    )
     @PostMapping("/")
     public SeriesResponse createSeries(@RequestBody @Valid CreateSeriesRequest request) {
         var series = seriesMapper.toSeries(request);
@@ -82,6 +100,16 @@ public class SeriesController {
     @GetMapping("/{id}")
     public SlimSeriesResponse getSeries(@PathVariable Integer id) {
         return seriesMapper.toSlimSeriesResponse(seriesService.getSeries(id));
+    }
+
+    @GetMapping("/{id}/season")
+    public Set<SlimSeasonResponse> getSeasons(@PathVariable Integer id) {
+        return seasonMapper.toSlimSeasonResponses(seriesService.getSeasons(id));
+    }
+
+    @GetMapping("/{id}/season/{seasonId}")
+    public SeasonResponse getSeason(@PathVariable Integer id, @PathVariable Integer seasonId) {
+        return seasonMapper.toSeasonResponse(seriesService.getSeason(id, seasonId));
     }
 
     @GetMapping("/")

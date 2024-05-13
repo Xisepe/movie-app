@@ -6,5 +6,5 @@ import ru.ccfit.golubevm.movieapp.core.entity.Genre;
 import java.util.Set;
 
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
-    Set<Genre> findAllByIdIn(Set<Integer> ids);
+
 }

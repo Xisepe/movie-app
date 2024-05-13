@@ -1,6 +1,7 @@
 package ru.ccfit.golubevm.movieapp.api.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -11,5 +12,6 @@ import java.io.Serializable;
 @Value
 public class UpdateCrewRoleRequest implements Serializable {
     @NotBlank
+    @Size(max = 64)
     String name;
 }

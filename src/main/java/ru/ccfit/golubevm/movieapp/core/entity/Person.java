@@ -12,10 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "person", indexes = {
-        @Index(name = "idx_person_name", columnList = "name"),
-        @Index(name = "idx_person_date_of_birth", columnList = "date_of_birth")
-})
+@Table(name = "person")
 public class Person extends MediaPreview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

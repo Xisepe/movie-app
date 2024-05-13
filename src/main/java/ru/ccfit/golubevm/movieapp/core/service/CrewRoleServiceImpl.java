@@ -23,10 +23,8 @@ public class CrewRoleServiceImpl implements CrewRoleService {
 
     @Override
     public CrewRole updateCrewRole(Integer id, CrewRole crewRole) {
-        Integer tId = null;
-        if (crewRoleRepository.existsById(id)) {
-            crewRole.setId(tId);
-        }
+        var role = getCrewRole(id);
+        role.setName(crewRole.getName());
         return crewRoleRepository.save(crewRole);
     }
 

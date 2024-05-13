@@ -2,7 +2,7 @@
 FROM gradle:latest AS builder
 WORKDIR /app
 COPY . .
-RUN gradle build --no-daemon -x test
+RUN gradle build --no-daemon test
 
 # Stage 2: Create a minimal runtime image
 FROM amazoncorretto:17-alpine

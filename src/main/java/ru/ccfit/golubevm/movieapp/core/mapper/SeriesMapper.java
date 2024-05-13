@@ -2,7 +2,7 @@ package ru.ccfit.golubevm.movieapp.core.mapper;
 
 import org.mapstruct.*;
 import ru.ccfit.golubevm.movieapp.api.request.CreateSeriesRequest;
-import ru.ccfit.golubevm.movieapp.SeriesResponse;
+import ru.ccfit.golubevm.movieapp.api.response.SeriesResponse;
 import ru.ccfit.golubevm.movieapp.api.response.SlimSeriesResponse;
 import ru.ccfit.golubevm.movieapp.core.entity.*;
 

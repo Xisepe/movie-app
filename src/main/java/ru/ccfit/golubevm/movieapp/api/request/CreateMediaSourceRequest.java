@@ -1,6 +1,8 @@
 package ru.ccfit.golubevm.movieapp.api.request;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Value;
 import ru.ccfit.golubevm.movieapp.core.entity.MediaType;
 
@@ -15,5 +17,6 @@ public class CreateMediaSourceRequest implements Serializable {
     @NotNull
     URL url;
     @NotNull
+    @Valid
     MediaType mediaType;
 }
